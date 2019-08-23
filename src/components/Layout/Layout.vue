@@ -1,7 +1,7 @@
 <template>
 <div :class="{root: true, chatOpen, sidebarClose, sidebarStatic}">
   <Sidebar />
-  <Helper />
+  <!-- <Helper /> -->
   <div class="wrap">
     <Header />
     <Chat />
@@ -9,9 +9,6 @@
       <transition name="router-animation">
         <router-view />
       </transition>
-      <footer class="contentFooter">
-        Sing App Vue Admin Dashboard Template - Made by <a href="https://flatlogic.com" rel="nofollow noopener noreferrer" target="_blank">Flatlogic</a>
-        </footer>
     </v-touch>
   </div>
 </div>

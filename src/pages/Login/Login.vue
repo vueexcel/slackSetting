@@ -1,86 +1,111 @@
 <template>
   <div class="login-page">
-    <b-container>
-      <h5 class="logo">
-        <i class="fa fa-circle text-gray" />
-        Sing App
-        <i class="fa fa-circle text-warning" />
-      </h5>
-      <Widget class="mx-auto" title="<h3 class='mt-0'>Login to your Web App</h3>" customHeader>
-        <p class="text-muted mb-0 mt fs-sm">
-          Use Facebook, Twitter or your email to sign in.
-        </p>
-        <p class="text-muted fs-sm">
-          Don't have an account? Sign up now!
-        </p>
+    <b-container class="pt-1 pb-1 bg-white shadow-sm col-md-6 col-11">
+      <Widget class="mx-auto" customHeader>
+        <h5 class="logo mb-5">
+          <img :src="logo" width="100%" alt="logo" />
+        </h5>
+        <h6 class="mt-0 mb-5 text-center font-weight-bold">
+          <i class="fa fa-slack" /> Slack Setting
+        </h6>
         <form class="mt" @submit.prevent="login">
-          <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
-            {{errorMessage}}
-          </b-alert>
+          <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">{{errorMessage}}</b-alert>
           <div class="form-group">
-            <input class="form-control no-border" ref="username"
-              required type="text" name="username" placeholder="Username" />
+            <input
+              class="form-control no-border"
+              ref="username"
+              required
+              type="text"
+              name="username"
+              placeholder="Username"
+              autofocus
+            />
           </div>
           <div class="form-group">
-            <input class="form-control no-border" ref="password"
-            required type="password" name="password" placeholder="Password" />
+            <input
+              class="form-control no-border"
+              ref="password"
+              required
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
           </div>
           <div class="clearfix">
             <div class="btn-toolbar float-right">
-              <b-button type="reset" size="sm" variant="default">Create an Account</b-button>
-              <b-button type="submit" size="sm" variant="inverse">Login</b-button>
-            </div>
-          </div>
-          <div class="row no-gutters mt-3">
-            <div class="col">
-              <div class="abc-checkbox">
-                <input
-                  type="checkbox"
-                  id="checkbox"
-                />
-                <label for="checkbox" class="text-muted fs-sm">Keep me signed in</label>
-              </div>
-            </div>
-            <div class="col">
-              <a class="mt-sm" href="">Trouble with account?</a>
+              <b-button type="submit" variant="inverse" class="w-100">
+                <span class="d-block pl-3 pr-3" v-if="loading">
+                  <i class="fa fa-circle-o-notch fa-spin" />
+                </span>
+                <span v-else>Login</span>
+              </b-button>
             </div>
           </div>
         </form>
       </Widget>
     </b-container>
-    <footer class="footer">
-      2019 &copy; Sing App Vue Admin Dashboard Template.
-    </footer>
   </div>
 </template>
 
 <script>
-import Widget from '@/components/Widget/Widget';
+import Widget from "@/components/Widget/Widget";
+import logo from "../../assets/images/logo.png";
+import { call, get } from "vuex-pathify";
 
 export default {
-  name: 'LoginPage',
+  name: "LoginPage",
   components: { Widget },
   data() {
     return {
       errorMessage: null,
+      loading: false,
+      logo
     };
   },
+  computed: {
+    isLoggedIn: get("login/isLoggedIn")
+  },
   methods: {
+    api_login: call("login/userLogin"),
     login() {
       const username = this.$refs.username.value;
       const password = this.$refs.password.value;
-
-      if (username.length !== 0 && password.length !== 0) {
-        window.localStorage.setItem('authenticated', true);
-        this.$router.push('/app/main/analytics');
+      if (username && password) {
+        this.loading = true;
+        this.api_login({ username: username, password: password })
+          .then(res => {
+            console.log(res);
+            if (res) {
+              this.$router.push("/app/tms");
+            }
+          })
+          .catch(err => {
+            console.log(err);
+            this.toast();
+          });
+      } else {
+        this.toast();
       }
     },
-  },
-  created() {
-    if (window.localStorage.getItem('authenticated') === 'true') {
-      this.$router.push('/app/main/analytics');
+    toast() {
+      this.$bvToast.toast(
+        `Wrong Credentials. Please check your username, password and try again.`,
+        {
+          title: `woah!`,
+          toaster: "b-toaster-top-center",
+          solid: true,
+          variant: "danger",
+          appendToast: false
+        }
+      );
     }
   },
+  mounted() {
+    // if (window.localStorage.getItem("authenticated") === "true") {
+    if (this.isLoggedIn === true) {
+      this.$router.push("/app/tms");
+    }
+  }
 };
 </script>
 

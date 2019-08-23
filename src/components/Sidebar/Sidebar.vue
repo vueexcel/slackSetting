@@ -5,10 +5,15 @@
     @mouseleave="sidebarMouseLeave"
   >
     <header class="logo">
-      <router-link to="/app"><span class="text-warning">Sing</span> App</router-link>
+      <router-link v-if="sidebarOpened || sidebarStatic===true" to>
+        <img class="pl-1 pr-4" :src="logo" width="100%" alt="logo" />
+      </router-link>
+      <router-link v-if="!sidebarOpened && sidebarStatic === false" to>
+        <img class="pl-2 pr-3" :src="X_logo" width="50px" alt="logo" />
+      </router-link>
     </header>
     <ul class="nav">
-      <NavLink
+      <!-- <NavLink
         :activeItem="activeItem"
         header="Dashboard"
         link="/app/main"
@@ -19,34 +24,32 @@
           { header: 'Visits', link: '/app/main/visits' },
           { header: 'Widgets', link: '/app/main/widgets' },
         ]"
-      />
+      />-->
       <NavLink
         :activeItem="activeItem"
-        header="Sing Package"
-        link="/app/package"
-        iconName="flaticon-database-1"
-        index="package"
-        label="new"
+        header="TMS"
+        link="/app/tms"
+        iconName="vue"
+        index="tms"
         isHeader
       />
       <NavLink
         :activeItem="activeItem"
-        header="Profile"
-        link="/app/profile"
-        iconName="flaticon-user"
-        index="profile"
+        header="HR"
+        link="/app/hr"
+        iconName="react"
+        index="hr"
         isHeader
       />
       <NavLink
         :activeItem="activeItem"
-        header="Email"
-        link="/app/email"
-        iconName="flaticon-paper-plane"
-        index="email"
-        badge="9"
+        header="Recruit"
+        link="/app/recruit"
+        iconName="angular"
+        index="recruit"
         isHeader
       />
-      <NavLink
+      <!-- <NavLink
         :activeItem="activeItem"
         header="E-commerce"
         link="/app/ecommerce"
@@ -56,8 +59,8 @@
           { header: 'Products Grid', link: '/app/ecommerce/products' },
           { header: 'Product Page', link: '/app/ecommerce/product' },
         ]"
-      />
-      <h5 class="navTitle">TEMPLATE</h5>
+      />-->
+      <!-- <h5 class="navTitle">TEMPLATE</h5>
       <NavLink
         :activeItem="activeItem"
         header="Core"
@@ -129,6 +132,8 @@
         link="/app/grid"
         iconName="flaticon-menu-4"
         index="grid"
+        label="new"
+        badge="9"
         isHeader
       />
       <NavLink
@@ -214,10 +219,10 @@
             ],
           },
         ]"
-      />
+      />-->
     </ul>
-    <p>
-    <h5 class="navTitle">
+    <p></p>
+    <!-- <h5 class="navTitle">
       LABELS
       <a class="actionLink">
         <i class="la la-plus float-right" />
@@ -243,83 +248,92 @@
         </a>
       </li>
     </ul>
-    <h5 class="navTitle">
-      PROJECTS
-    </h5>
+    <h5 class="navTitle">PROJECTS</h5>
     <div class="sidebarAlerts">
       <b-alert
         v-for="alert in alerts"
         :key="alert.id"
-        class="sidebarAlert" variant="transparent"
-        show dismissible
+        class="sidebarAlert"
+        variant="transparent"
+        show
+        dismissible
       >
-        <span>{{alert.title}}</span><br />
-        <b-progress class="sidebarProgress progress-xs mt-1"
-          :variant="alert.color" :value="alert.value" :max="100" />
+        <span>{{alert.title}}</span>
+        <br />
+        <b-progress
+          class="sidebarProgress progress-xs mt-1"
+          :variant="alert.color"
+          :value="alert.value"
+          :max="100"
+        />
         <small>{{alert.footer}}</small>
       </b-alert>
-    </div>
+    </div>-->
   </nav>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-import isScreen from '@/core/screenHelper';
-import NavLink from './NavLink/NavLink';
+import { mapState, mapActions } from "vuex";
+import isScreen from "@/core/screenHelper";
+import NavLink from "./NavLink/NavLink";
+import logo from "@/assets/images/logo.png";
+import X_logo from "@/assets/images/X_logo.png";
 
 export default {
-  name: 'Sidebar',
+  name: "Sidebar",
   components: { NavLink },
   data() {
     return {
       alerts: [
         {
           id: 0,
-          title: 'Sales Report',
+          title: "Sales Report",
           value: 15,
-          footer: 'Calculating x-axis bias... 65%',
-          color: 'info',
+          footer: "Calculating x-axis bias... 65%",
+          color: "info"
         },
         {
           id: 1,
-          title: 'Personal Responsibility',
+          title: "Personal Responsibility",
           value: 20,
-          footer: 'Provide required notes',
-          color: 'danger',
-        },
+          footer: "Provide required notes",
+          color: "danger"
+        }
       ],
+      logo,
+      X_logo
     };
   },
   methods: {
-    ...mapActions('layout', ['changeSidebarActive', 'switchSidebar']),
+    ...mapActions("layout", ["changeSidebarActive", "switchSidebar"]),
     setActiveByRoute() {
-      const paths = this.$route.fullPath.split('/');
+      const paths = this.$route.fullPath.split("/");
       paths.pop();
-      this.changeSidebarActive(paths.join('/'));
+      this.changeSidebarActive(paths.join("/"));
     },
     sidebarMouseEnter() {
-      if (!this.sidebarStatic && (isScreen('lg') || isScreen('xl'))) {
+      if (!this.sidebarStatic && (isScreen("lg") || isScreen("xl"))) {
         this.switchSidebar(false);
         this.setActiveByRoute();
       }
     },
     sidebarMouseLeave() {
-      if (!this.sidebarStatic && (isScreen('lg') || isScreen('xl'))) {
+      if (!this.sidebarStatic && (isScreen("lg") || isScreen("xl"))) {
         this.switchSidebar(true);
         this.changeSidebarActive(null);
       }
-    },
+    }
   },
   created() {
     this.setActiveByRoute();
   },
   computed: {
-    ...mapState('layout', {
+    ...mapState("layout", {
       sidebarStatic: state => state.sidebarStatic,
       sidebarOpened: state => !state.sidebarClose,
-      activeItem: state => state.sidebarActiveElement,
-    }),
-  },
+      activeItem: state => state.sidebarActiveElement
+    })
+  }
 };
 </script>
 

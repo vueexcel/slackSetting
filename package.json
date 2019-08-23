@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "install": "napa",
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --host localhost",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "start": "node server.js"
@@ -12,6 +12,7 @@
   "dependencies": {
     "animate.css": "^3.6.1",
     "awesome-bootstrap-checkbox": "^1.0.1",
+    "axios": "^0.19.0",
     "bootstrap": "^4.1.1",
     "bootstrap-vue": "^2.0.0-rc.11",
     "css-loader": "^1.0.0",
@@ -31,6 +32,7 @@
     "jquery-ui": "^1.12.1",
     "jquery.animate-number": "^0.0.14",
     "jvectormap": "^2.0.4",
+    "jwt-decode": "^2.2.0",
     "line-awesome": "icons8/line-awesome",
     "mavon-editor": "^2.6.15",
     "messenger": "git+https://github.com/HubSpot/messenger.git#v1.4.2",
@@ -63,6 +65,7 @@
     "vuedraggable": "^2.16.0",
     "vuetrend": "^0.3.2",
     "vuex": "^3.0.1",
+    "vuex-pathify": "^1.2.4",
     "webpack-cli": "^3.1.2",
     "webpack-raphael": "^2.1.4",
     "widgster": "^1.0.0"
