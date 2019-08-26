@@ -15,17 +15,17 @@ export default {
     const currentPath = this.$router.history.current.path;
 
     // if (window.localStorage.getItem("authenticated") === "false") {
-    if (!this.validateJwt()) {
-      if (currentPath === "/login") {
-        return;
-      }
-      this.$router.push("/login");
-    } else {
+    // if (!this.validateJwt()) {
+      // if (currentPath === "/login") {
+      //   return;
+      // }
+      // this.$router.push("/login");
+    // } else {
       if (currentPath === "/" || currentPath === "/app") {
         // this.$router.push("/app/main/analytics");
         this.$router.push("/app/tms");
       }
-    }
+    // }
   }
 };
 </script>

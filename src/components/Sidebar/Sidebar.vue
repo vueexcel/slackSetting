@@ -49,6 +49,14 @@
         index="recruit"
         isHeader
       />
+      <NavLink
+        :activeItem="activeItem"
+        header="Setting"
+        link="/app/setting"
+        iconName="fa fa-cog"
+        index="setting"
+        isHeader
+      />
       <!-- <NavLink
         :activeItem="activeItem"
         header="E-commerce"

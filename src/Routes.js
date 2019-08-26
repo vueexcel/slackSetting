@@ -24,7 +24,8 @@ import RickshawPage from "@/pages/Charts/Rickshaw/Rickshaw";
 import SparklinePage from "@/pages/Charts/Sparkline/Sparkline";
 import EasyPiePage from "@/pages/Charts/EasyPie/EasyPie";
 import ProfilePage from "@/pages/Profile/Profile";
-import SettingPage from "@/components/Settings/Settings";
+import TmsSettingPage from "@/components/TmsSettings/TmsSettings";
+import Setting from "@/pages/Setting/Setting"
 // Profile
 import PackagePage from "@/pages/Package/Package";
 // Email
@@ -115,19 +116,24 @@ const router = new Router({
          */
         {
           path: "tms",
-          name: "SettingPage",
-          component: SettingPage,
+          name: "TmsSettingPage",
+          component: TmsSettingPage,
           meta: { requiresAuth: true }
         },
         {
+          path: 'Setting',
+          name: 'Setting',
+          component: Setting
+        },
+        {
           path: "hr",
-          name: "SettingPage",
-          component: SettingPage
+          name: "TmsSettingPage",
+          component: TmsSettingPage
         },
         {
           path: "recruit",
-          name: "SettingPage",
-          component: SettingPage
+          name: "TmsSettingPage",
+          component: TmsSettingPage
         },
         // profile page
         {
@@ -350,33 +356,33 @@ const router = new Router({
   ]
 });
 
-function validateJwt() {
-  if (localStorage.getItem("authenticated") && localStorage.getItem("authenticated") !== 'false') {
-    var decoded = jwt_decode(localStorage.getItem("authenticated"));
-    const now = Date.now().valueOf() / 1000
-    if (now <= decoded.exp) {
-      return true;
-    } else {
-      return false;
-    }
-  } else {
-    return false;
-  }
-}
+// function validateJwt() {
+//   if (localStorage.getItem("authenticated") && localStorage.getItem("authenticated") !== 'false') {
+//     var decoded = jwt_decode(localStorage.getItem("authenticated"));
+//     const now = Date.now().valueOf() / 1000
+//     if (now <= decoded.exp) {
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   } else {
+//     return false;
+//   }
+// }
 
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
+// router.beforeEach((to, from, next) => {
+  // if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    if (!validateJwt()) {
-      next({
-        path: '/login',
-      })
-    } else {
-      next()
-    }
-  } else {
-    next() // make sure to always call next()!
-  }
-})
+    // if (!validateJwt()) {
+    //   next({
+    //     path: '/login',
+    //   })
+    // } else {
+    //   next()
+    // }
+  // } else {
+    // next() // make sure to always call next()!
+  // }
+// })
 export default router

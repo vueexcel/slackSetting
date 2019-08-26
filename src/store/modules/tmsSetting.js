@@ -48,13 +48,27 @@ const actions = {
   },
   // @bp.route('/slack_mesg', methods=["GET"])
   async slackMessage() {
-    let res = await axios.get("/tms/slack_mesg");
-    return res;
+    let response = {
+      error: false,
+      res: null
+    }
+    try {
+      let res = await axios.get("/message/configuration/TMS");
+       response.res = res.data;
+       return response
+    } catch (error) {
+      response.error = true
+      return response
+    }
   },
   // https://still-plains-80981.herokuapp.com/tms/slack
   async getSlackChannels() {
-    let res = await axios.get("/tms/slack");
-    return res;
+    try {
+      let res = await axios.get("/slackchannels");
+      return res;
+    } catch (error) {
+      
+    }
   },
   // https://still-plains-80981.herokuapp.com/tms/slack_mesg
   async updateSlackChannels({ state, commit }, payload) {

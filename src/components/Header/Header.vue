@@ -33,8 +33,8 @@
         <template slot="button-content">
           <i class="la la-cog px-2 fa-spin" />
         </template>
-        <b-dropdown-item-button @click="logout">
-          <i class="la la-sign-out" /> Log Out
+        <b-dropdown-item-button>
+          <!-- <i class="la la-sign-out" /> Log Out -->
         </b-dropdown-item-button>
       </b-nav-item-dropdown>
       <b-nav-item-dropdown class="settingsDropdown d-md-none" no-caret right>
@@ -43,8 +43,8 @@
             <i class="la la-cog px-2 fa-spin" />
           </span>
         </template>
-        <b-dropdown-item-button @click="logout">
-          <i class="la la-sign-out" /> Log Out
+        <b-dropdown-item-button>
+          <!-- <i class="la la-sign-out" /> Log Out -->
         </b-dropdown-item-button>
       </b-nav-item-dropdown>
       <!-- <b-nav-item class="fs-lg d-md-none">

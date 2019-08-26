@@ -1,9 +1,12 @@
 <template>
   <li v-if="!childrenLinks && isHeader" :class="{headerLink: true, className}">
     <router-link :to="link">
-      <span class="icon">
+      <span class="icon" v-if="fullIconName !== 'fa fa-cog'">
         <!-- <i :class="fullIconName"></i> -->
         <img :src="fullIconName" width="20px" alt="logo">
+      </span>
+      <span class="icon" v-if="fullIconName == 'fa fa-cog'">
+          <i :class="fullIconName"></i>
       </span>
       {{header}} <sup v-if="label" class="headerLabel">{{label}}</sup>
       <b-badge v-if="badge" class="badge rounded-f" variant="warning" pill>{{badge}}</b-badge>
@@ -75,8 +78,13 @@ export default {
   },
   computed: {
     fullIconName() {
-      // return `fi ${this.iconName}`;
-      return require(`@/assets/tech/${this.iconName}.png`);
+      let icons = null
+      if(this.iconName === 'fa fa-cog'){
+        icons = `${this.iconName}`;
+      } else {
+        icons = require(`@/assets/tech/${this.iconName}.png`);
+      }
+      return icons
     },
     isActive() {
       return (this.activeItem
