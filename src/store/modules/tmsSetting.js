@@ -1,6 +1,3 @@
-// https://still-plains-80981.herokuapp.com/tms/schduler_mesg
-// https://still-plains-80981.herokuapp.com/tms/schdulers_settings
-// https://still-plains-80981.herokuapp.com/tms/tms_settings
 import axios from "../axios";
 import { make } from "vuex-pathify";
 import router from "./../../Routes";
@@ -21,23 +18,23 @@ const actions = {
     return res;
   },
 
-  async schedularSettings() {
-    let res = await axios.get("/tms/schdulers_settings");
-    return res;
-  },
-  async setSchedularSettings({ state, commit }, payload) {
-    let res = await axios.put("/tms/schdulers_settings", payload);
-    return res;
-  },
+  // async schedularSettings() {
+  //   let res = await axios.get("/tms/schdulers_settings");
+  //   return res;
+  // },
+  // async setSchedularSettings({ state, commit }, payload) {
+  //   let res = await axios.put("/tms/schdulers_settings", payload);
+  //   return res;
+  // },
 
-  async schedularMsg() {
-    let res = await axios.get("/tms/schduler_mesg");
-    return res;
-  },
-  async setSchedularMsg({ state, commit }, payload) {
-    let res = await axios.put("/tms/schduler_mesg", payload);
-    return res;
-  },
+  // async schedularMsg() {
+  //   let res = await axios.get("/tms/schduler_mesg");
+  //   return res;
+  // },
+  // async setSchedularMsg({ state, commit }, payload) {
+  //   let res = await axios.put("/tms/schduler_mesg", payload);
+  //   return res;
+  // },
   async removeDisabledUser({ state, commit }, payload) {
     let res = await axios.delete("/tms/remove_disable_user", payload);
     return res;
@@ -46,33 +43,31 @@ const actions = {
     let res = await axios.delete("/tms/remove_previous_checkin", payload);
     return res;
   },
-  // @bp.route('/slack_mesg', methods=["GET"])
   async slackMessage() {
     let response = {
       error: false,
       res: null
-    }
+    };
     try {
       let res = await axios.get("/message/configuration/TMS");
-       response.res = res.data;
-       return response
+      response.res = res.data;
+      return response;
     } catch (error) {
-      response.error = true
-      return response
+      response.error = true;
+      return response;
     }
   },
-  // https://still-plains-80981.herokuapp.com/tms/slack
   async getSlackChannels() {
     try {
       let res = await axios.get("/slackchannels");
       return res;
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   },
-  // https://still-plains-80981.herokuapp.com/tms/slack_mesg
   async updateSlackChannels({ state, commit }, payload) {
-    let res = await axios.put("/tms/slack_mesg", payload);
+    let res = await axios.put(
+      `/message/configuration/${payload.message_origin}`,
+      payload
+    );
     return res;
   }
 };
