@@ -25,8 +25,9 @@ import SparklinePage from "@/pages/Charts/Sparkline/Sparkline";
 import EasyPiePage from "@/pages/Charts/EasyPie/EasyPie";
 import ProfilePage from "@/pages/Profile/Profile";
 import TmsSettingPage from "@/components/TmsSettings/TmsSettings";
-import hrSetting from "@/pages/hrSetting/hrSetting"
-import Setting from "@/pages/Setting/Setting"
+import hrSetting from "@/pages/hrSetting/hrSetting";
+import RecruitSettingPage from "@/pages/RecruitSettingPage/RecruitSettingPage";
+import Setting from "@/pages/Setting/Setting";
 // Profile
 import PackagePage from "@/pages/Package/Package";
 // Email
@@ -65,8 +66,8 @@ import PopoversPage from "@/pages/Ui/Popovers/Popovers";
 import ProgressPage from "@/pages/Ui/Progress/Progress";
 import TabsPage from "@/pages/Ui/Tabs/Tabs";
 // vuex store
-import store from "./store/index"
-import jwt_decode from "jwt-decode"
+import store from "./store/index";
+import jwt_decode from "jwt-decode";
 
 Vue.use(Router);
 
@@ -77,7 +78,7 @@ const router = new Router({
     {
       path: "/login",
       name: "Login",
-      component: Login,
+      component: Login
     },
     {
       path: "/error",
@@ -122,8 +123,8 @@ const router = new Router({
           meta: { requiresAuth: true }
         },
         {
-          path: 'Setting',
-          name: 'Setting',
+          path: "Setting",
+          name: "Setting",
           component: Setting
         },
         {
@@ -133,8 +134,8 @@ const router = new Router({
         },
         {
           path: "recruit",
-          name: "TmsSettingPage",
-          component: TmsSettingPage
+          name: "RecruitSettingPage",
+          component: RecruitSettingPage
         },
         // profile page
         {
@@ -372,18 +373,18 @@ const router = new Router({
 // }
 
 // router.beforeEach((to, from, next) => {
-  // if (to.matched.some(record => record.meta.requiresAuth)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
-    // if (!validateJwt()) {
-    //   next({
-    //     path: '/login',
-    //   })
-    // } else {
-    //   next()
-    // }
-  // } else {
-    // next() // make sure to always call next()!
-  // }
+// if (to.matched.some(record => record.meta.requiresAuth)) {
+// this route requires auth, check if logged in
+// if not, redirect to login page.
+// if (!validateJwt()) {
+//   next({
+//     path: '/login',
+//   })
+// } else {
+//   next()
+// }
+// } else {
+// next() // make sure to always call next()!
+// }
 // })
-export default router
+export default router;
