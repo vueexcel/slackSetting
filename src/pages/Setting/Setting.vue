@@ -2,7 +2,6 @@
   <div class="forms-elements">
     <h1>Settings</h1>
     <br />
-
     <b-row class="mt-3">
       <b-col>
         <h4>Slack Notification</h4>
@@ -13,10 +12,11 @@
             <label for="checkbox-ios2" class="switch form-control-label">
               <input
                 type="checkbox"
+                v-model="form.slack_notfication"
                 id="checkbox-ios2"
                 class="ios form-check-input"
                 value="on"
-                checked
+                @change="setSettings('check-box')"
               />
               <i></i>
             </label>
@@ -28,7 +28,7 @@
       <b-col md="12">
         <Widget>
           <b-form-group>
-            <b-form @submit.prevent="setSlackSettings()">
+            <b-form @submit.prevent>
               <legend>
                 <strong>Slack</strong> tokens
               </legend>
@@ -42,7 +42,8 @@
                 <div slot="label">Slack token</div>
                 <b-form-input
                   type="text"
-                  v-model="slackTokens.slack_token"
+                  @keypress.13="setSettings('save-btn')"
+                  v-model="form.slack_token"
                   id="label-hint"
                   required
                 />
@@ -53,14 +54,7 @@
                 label-for="transparent-field"
                 :label-cols="2"
                 breakpoint="md"
-              >
-                <b-button variant="primary" type="submit" class="mr-xs w-28">
-                  <span v-if="loadingSlackToken">
-                    <i class="fa fa-circle-o-notch fa-spin"></i>
-                  </span>
-                  <span v-else>Save Changes</span>
-                </b-button>
-              </b-form-group>
+              ></b-form-group>
             </b-form>
           </b-form-group>
         </Widget>
@@ -73,13 +67,14 @@
       <b-col>
         <b-form>
           <b-form-group class="display-inline-block checkbox-ios">
-            <label for="checkbox-ios2" class="switch form-control-label">
+            <label for="checkbox-ios3" class="switch form-control-label">
               <input
                 type="checkbox"
-                id="checkbox-ios2"
+                id="checkbox-ios3"
                 class="ios form-check-input"
                 value="on"
-                checked
+                v-model="form.send_email"
+                @change="setSettings('check-box')"
               />
               <i></i>
             </label>
@@ -94,13 +89,14 @@
       <b-col>
         <b-form>
           <b-form-group class="display-inline-block checkbox-ios">
-            <label for="checkbox-ios2" class="switch form-control-label">
+            <label for="checkbox-ios4" class="switch form-control-label">
               <input
                 type="checkbox"
-                id="checkbox-ios2"
+                id="checkbox-ios4"
                 class="ios form-check-input"
                 value="on"
-                checked
+                v-model="form.mobile_message"
+                @change="setSettings('check-box')"
               />
               <i></i>
             </label>
@@ -112,42 +108,62 @@
 </template>
 
 <script>
-import Vue from "vue";
-import vSelect from "vue-select";
-import DatePicker from "vue2-datepicker";
-import { bFormSlider } from "vue-bootstrap-slider";
-import vueDropzone from "vue2-dropzone";
-import { Chrome } from "vue-color";
 import Widget from "@/components/Widget/Widget";
-
 import { call } from "vuex-pathify";
 
 export default {
-  name: "FormElements",
+  name: "setting",
   components: {
-    Widget,
-    vSelect,
-    DatePicker,
-    bFormSlider,
-    vueDropzone,
-    Chrome
+    Widget
   },
   data() {
     return {
-      isPickerActive: false,
-      allMessage: [],
-      slackTokens: {
-        webhook_url: "",
-        slack_token: "",
-        secret_key: ""
+      form: {
+        mobile_message: false,
+        send_email: false,
+        slack_notfication: false,
+        slack_token: ""
       }
     };
   },
-  mounted() {
-    this.callApi();
+  created() {
+    this.fetchSetting();
   },
   methods: {
-    callApi() {
+    api_allsettings: call("setting/allsettings"),
+    api_setallsettings: call("setting/setallsettings"),
+    fetchSetting() {
+      this.api_allsettings()
+        .then(res => {
+          if (res.status === 200) {
+            (this.form.mobile_message = res.data.mobile_message),
+              (this.form.send_email = res.data.send_email),
+              (this.form.slack_notfication = res.data.slack_notfication),
+              (this.form.slack_token = res.data.slack_token);
+          }
+        })
+        .catch(err => {
+          console.log(err.response);
+        });
+    },
+    setSettings(val) {
+      if (val === "save-btn") {
+      }
+      this.api_setallsettings(this.form)
+        .then(res => {
+          this.$bvToast.toast("Changes has been updated", {
+            title: "OK!",
+            variant: "success",
+            solid: true
+          });
+        })
+        .catch(err => {
+          this.$bvToast.toast("something went wrong!", {
+            title: "uh oh!",
+            variant: "danger",
+            solid: true
+          });
+        });
     }
   }
 };
