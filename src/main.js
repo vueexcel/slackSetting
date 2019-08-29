@@ -17,6 +17,8 @@ import { VueMaskDirective } from "v-mask";
 import VeeValidate from "vee-validate";
 import VueFormWizard from "vue-form-wizard";
 
+import { ValidationProvider, extend } from 'vee-validate';
+
 import store from "./store";
 import router from "./Routes";
 import App from "./App";
@@ -36,6 +38,7 @@ Vue.use(mavonEditor);
 Vue.directive("mask", VueMaskDirective);
 Vue.use(VeeValidate, { fieldsBagName: "fieldsbag" });
 Vue.use(VueFormWizard);
+Vue.component('ValidationProvider', ValidationProvider);
 
 Vue.config.productionTip = false;
 

@@ -1,138 +1,91 @@
 <template>
   <div>
     <h1>TMS Settings</h1>
-    <b-row class="justify-content-md-center">
-      <b-col v-if="allMessage" md="10">
-        <!-- <Widget customHeader> -->
-        <div
-          class="pl-1 mb-5 bg-white mt-3"
-          v-for="(msg , key) in allMessage"
-          :key="key"
-          :style="{ borderLeft: '4px solid ' + msg.message_color }"
-        >
-          <span v-if="!msg.edit">{{ msg.message }}</span>
-          <span v-if="msg.edit">
-            <input
-              class="form-control"
-              type="text"
-              :ref="'textval' + key"
-              @select="noSelect($event,key)"
-              @keydown="textedit($event,key)"
-              @keypress="textedit($event,key)"
-              @keypress.enter="updateMessage(msg,key), msg.edit = !msg.edit"
-              v-model="msg.message"
-            />
-          </span>
-          <!-- {{index}} -->
-          <span class="d-flex m-1 text-primary">
-            <a @click="msg.edit = !msg.edit">
-              <span v-if="!msg.edit">Edit</span>
-              <span v-else>Cancel</span>
-            </a>
-          </span>
-          <div class="mt-4" v-if="msg.slackChannelsArray">
-            <label for="slack">
-              <i>Slack Channels</i>
-            </label>
-            <hr class="mt-1 mb-1" />
-            <b-form-group id="slack">
-              <!-- <b-form-input
-                  @keypress.esc="searchField = ''"
-                  type="search"
-                  class="w-25"
-                  v-model="searchField"
-                  name="search"
-                  placeholder="Search"
-              ></b-form-input>-->
+    <div v-if="allMessage">
+      <b-row class="justify-content-md-center" v-for="(msg , key) in allMessage" :key="key">
+        <b-col>
+          <!-- <Widget customHeader> -->
+          <!-- :style="{ borderLeft: '4px solid ' + msg.message_color ? msg.message_color : '#0375D8' }" -->
+          <div class="pl-1 mb-5 bg-white mt-3 pt-2" style="borderLeft: 4px solid #0375D8">
+            <span v-if="!msg.edit" class="font-weight-bold px-2">{{ msg.message }} <b-badge variant="primary" class="ml-3" pill>{{msg.message_type}}</b-badge></span> 
+            <span v-if="msg.edit">
+              <input
+                class="form-control"
+                type="text"
+                :ref="'textval' + key"
+                @select="noSelect($event,key)"
+                @keydown="textedit($event,key)"
+                @keypress="textedit($event,key)"
+                @keypress.enter="updateMessage(msg,key), msg.edit = !msg.edit"
+                v-model="msg.message"
+              />
+            </span>
+            <span class="d-flex m-1 px-2">
+              <a @click="msg.edit = !msg.edit" class="font-weight-bold">
+                <span v-if="!msg.edit" class="text-primary">Edit</span>
+                <span v-else class="text-danger">Cancel</span>
+              </a>
+            </span>
+            <div class="mt-4 px-2" v-if="msg.slackChannelsArray">
+              <b-row align-v="center">
+                <b-col cols="10" class="d-flex">
+                  <span for="email">
+                    <i class="font-weight-bold">Slack Channels</i>
+                  </span>
+                  <b-form-checkbox switch class="ml-2">On</b-form-checkbox>
+                </b-col>
+                <b-col cols="2">
+                  <b-button variant="primary" class="float-right" pill>Test</b-button>
+                </b-col>
+              </b-row>
+              <!-- <label for="slack">
+                    <i>Slack Channels</i>
+              </label>-->
+              <hr class="mt-1 mb-1" />
+              <b-form-group id="slack">
+                <b-form-checkbox-group
+                  id="checkbox-group-1"
+                  v-model="selectedSlackChannel[key]"
+                  name="flavour-1"
+                >
+                  <b-form-checkbox
+                    :value="channel.value"
+                    v-for="(channel,index) in msg.slackChannelsArray"
+                    :key="index"
+                  >{{channel.text}}</b-form-checkbox>
+                </b-form-checkbox-group>
+              </b-form-group>
+            </div>
 
-              <b-form-checkbox-group
-                id="checkbox-group-1"
-                v-model="selectedSlackChannel[key]"
-                name="flavour-1"
-              >
-                <!-- v-for="(channel,index) in slackChannels" -->
-                <!-- @input="updateMessage( msg,key )" -->
-
-                <b-form-checkbox
-                  :value="channel.value"
-                  v-for="(channel,index) in msg.slackChannelsArray"
-                  :key="index"
-                >{{channel.text}}</b-form-checkbox>
-              </b-form-checkbox-group>
-            </b-form-group>
             <!-- *
             ****** EMAIL-->
-            {{tags}}
-            <label for="email">
-              <i>Email</i>
-            </label>
-            <hr class="mt-1 mb-1" />
-            <b-form-group id="email">
-              <!-- <vue-tags-input
-                :add-on-key="[13, ':', ';', ',']"
-                v-model="tag"
-                :tags="tags"
-                :validation="validation"
-                @tags-changed="newTags => tags = newTags"
-              />-->
-              <b-input type="text" v-model="tag" v-on:keyup="addBid"></b-input>
-            </b-form-group>
-            <div class="d-flex flex-wrap">
-              <div v-for="(bid,index) in tags" :key="index" class="width_chip mt-1 ml-1">
-                <div class="bg-primary text-white rounded-pill pl-2 pr-2 cursor">
-                  <span>{{bid}}</span>
-                  &nbsp;
-                  <i class="fa fa-times" @click="deleteBid(index)"></i>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex flex-wrap">
-              <div v-for="(bid,index) in rottentags" :key="index" class="width_chip mt-1 ml-1">
-                <div class="bg-danger text-white rounded-pill pl-2 pr-2 cursor">
-                  <span>{{bid}}</span>
-                  &nbsp;
-                  <i class="fa fa-times" @click="deleterottentags(index)"></i>
-                </div>
-              </div>
-            </div>
+
+            <Email :index="key" @emailArray="emailArrayToget"></Email>
+
             <!-- *
             ****** Mobile Message-->
-            <label for="mobileMessage">
-              <i>Mobile Message</i>
-            </label>
-            <hr class="mt-1 mb-1" />
-            <b-form-group id="mobileMessage">
-              <b-input type="number"></b-input>
-            </b-form-group>
+            <!-- <Mobile :index="key" @mobileArray="mobileArrayToget"></Mobile> -->
           </div>
-          <div class="mt-2">
-            <b-button variant="primary" @click="updateMessage( msg,key )">
-              <span class="d-block pl-3 pr-3" v-if="loading[key]===true">
-                <i class="fa fa-circle-o-notch fa-spin" />
-              </span>
-              <span v-else>Update</span>
-            </b-button>
-          </div>
-        </div>
-        <!-- </Widget> -->
-      </b-col>
-      <b-col md="2">
-        <b-button variant="primary">Test</b-button>
-      </b-col>
-    </b-row>
+          <!-- </Widget> -->
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 
 <script>
 import Widget from "@/components/Widget/Widget";
-import VueTagsInput from "@johmun/vue-tags-input";
 import SlackChannels from "@/components/SlackChannels/SlackChannels";
+import Email from "./email/email.vue";
+// import Mobile from "./MobileMessage/mobileMessage.vue"
 import { call } from "vuex-pathify";
+import Vue from "vue";
 export default {
   components: {
     Widget,
     SlackChannels,
-    VueTagsInput
+    Email
+    // Mobile
   },
   created() {
     // this.getSlackSettings();
@@ -144,21 +97,8 @@ export default {
     return {
       tag: "",
       tags: [],
-      rottentags: [],
-      validation: [
-        {
-          classes: "min-length",
-          rule: tag => tag.text.length < 3
-        },
-        {
-          classes: "avoid-item",
-          rule: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
-          disableAdd: true
-        }
-      ],
+      mobileTags: [],
       edit: false,
-      textmessage:
-        "Lorem @ipsum dolor sit amet, @consectetur adipisicing elit. Dicta architecto molestias adipisci, excepturi vel dignissimos a, doloribus beatae suscipit cum optio voluptate? @Sed, deleniti voluptate? Qui esse iusto eaque amet.",
       loadingSlackToken: false,
       slackTokens: {
         webhook_url: "",
@@ -276,7 +216,6 @@ export default {
             });
             this.$nextTick(() => {
               this.$forceUpdate();
-              console.log(this.allMessage);
             });
           }
         })
@@ -328,35 +267,11 @@ export default {
           this.$set(this.loading, key, false);
         });
     },
-    addBid(event) {
-      if (
-        event.key == "," ||
-        event.key == ";" ||
-        event.key == " " ||
-        event.key == "Enter"
-      ) {
-        let stringArr = this.tag.split(/[ , ; \n \\]+/);
-        console.log(stringArr);
-        if (stringArr.length) {
-          stringArr.forEach(str => {
-            if (str.length) {
-              var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-              if (reg.test(str) == true) {
-                this.tags.push(str);
-              } else {
-                this.rottentags.push(str);
-              }
-            }
-          });
-        }
-        this.tag = "";
-      }
+    emailArrayToget(value) {
+      this.tags[value.index] = value.email;
     },
-    deleteBid(index) {
-      this.tags.splice(index, 1);
-    },
-    deleterottentags(index) {
-      this.rottentags.splice(index, 1);
+    mobileArrayToget(value) {
+      Vue.set(this.mobileTags, value.index, value.number);
     }
   }
 };

@@ -25,6 +25,7 @@ import SparklinePage from "@/pages/Charts/Sparkline/Sparkline";
 import EasyPiePage from "@/pages/Charts/EasyPie/EasyPie";
 import ProfilePage from "@/pages/Profile/Profile";
 import TmsSettingPage from "@/components/TmsSettings/TmsSettings";
+import hrSetting from "@/pages/hrSetting/hrSetting"
 import Setting from "@/pages/Setting/Setting"
 // Profile
 import PackagePage from "@/pages/Package/Package";
@@ -127,8 +128,8 @@ const router = new Router({
         },
         {
           path: "hr",
-          name: "TmsSettingPage",
-          component: TmsSettingPage
+          name: "hrSetting",
+          component: hrSetting
         },
         {
           path: "recruit",
