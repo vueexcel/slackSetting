@@ -33,9 +33,11 @@
         <template slot="button-content">
           <i class="la la-cog px-2 fa-spin" />
         </template>
-        <b-dropdown-item-button>
-          <!-- <i class="la la-sign-out" /> Log Out -->
-        </b-dropdown-item-button>
+        <router-link to="/app/setting">
+          <b-dropdown-item-button>
+            <i class="la la-cog" /> Setting
+          </b-dropdown-item-button>
+        </router-link>
       </b-nav-item-dropdown>
       <b-nav-item-dropdown class="settingsDropdown d-md-none" no-caret right>
         <template slot="button-content">

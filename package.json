@@ -68,7 +68,8 @@
     "vuex-pathify": "^1.2.4",
     "webpack-cli": "^3.1.2",
     "webpack-raphael": "^2.1.4",
-    "widgster": "^1.0.0"
+    "widgster": "^1.0.0",
+    "vue2-editor": "^2.8.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.5",
