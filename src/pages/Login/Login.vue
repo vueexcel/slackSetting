@@ -76,7 +76,7 @@ export default {
           .then(res => {
             console.log(res);
             if (res) {
-              this.$router.push("/app/tms");
+              this.$router.push("/app/notificationMessages");
             }
           })
           .catch(err => {
@@ -103,7 +103,7 @@ export default {
   mounted() {
     // if (window.localStorage.getItem("authenticated") === "true") {
     if (this.isLoggedIn === true) {
-      this.$router.push("/app/tms");
+      this.$router.push("/app/notificationMessages");
     }
   }
 };

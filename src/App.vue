@@ -1,5 +1,5 @@
 <template>
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
@@ -16,15 +16,15 @@ export default {
 
     // if (window.localStorage.getItem("authenticated") === "false") {
     // if (!this.validateJwt()) {
-      // if (currentPath === "/login") {
-      //   return;
-      // }
-      // this.$router.push("/login");
+    // if (currentPath === "/login") {
+    //   return;
+    // }
+    // this.$router.push("/login");
     // } else {
-      if (currentPath === "/" || currentPath === "/app") {
-        // this.$router.push("/app/main/analytics");
-        this.$router.push("/app/tms");
-      }
+    if (currentPath === "/" || currentPath === "/app") {
+      // this.$router.push("/app/main/analytics");
+      this.$router.push("/app/notificationMessages");
+    }
     // }
   }
 };

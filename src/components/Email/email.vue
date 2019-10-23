@@ -1,9 +1,9 @@
 <template>
-  <Widget customHeader v-if="mail !== null">
+  <Widget class="mt-5 mt-lg-0" customHeader v-if="mail !== null">
     <b-row class="col-container">
-      <b-col cols="9" class="col">
-        <b-row>
-          <b-col cols="1">
+      <b-col cols="12" class="col" lg="9">
+        <!-- <b-row>
+          <b-col cols="12" lg="1">
             <span>Send to:</span>
           </b-col>
           <b-col cols="11">
@@ -13,7 +13,7 @@
           </b-col>
         </b-row>
         <b-row>
-          <b-col cols="1">
+          <b-col cols="12" lg="1">
             <span>Subject</span>
           </b-col>
           <b-col cols="11">
@@ -21,9 +21,9 @@
               <b-input type="text" v-model="tag" v-on:keyup="addBid" class="mt-2"></b-input>
             </b-form-group>
           </b-col>
-        </b-row>
+        </b-row>-->
         <b-row>
-          <b-col cols="1">
+          <b-col cols="12" lg="1">
             <span>Body</span>
           </b-col>
           <b-col cols="11">
@@ -32,7 +32,7 @@
           </b-col>
         </b-row>
       </b-col>
-      <b-col cols="3" class="col">
+      <b-col cols="12" class="col mt-5 mt-lg-0" lg="3">
         <h5>
           <strong>Variables</strong>
         </h5>
@@ -111,6 +111,7 @@ export default {
     editBody() {
       this.bodyEdit = true;
       this.genReport = this.mail.body;
+      this.$emit("messageBody", this.genReport);
     }
   },
   watch: {
@@ -122,11 +123,11 @@ export default {
 </script>
 
 <style>
-.col-container{
-    display: table;
+.col-container {
+  display: table;
 }
 
 .col {
-    display: table-cell;
+  display: table-cell;
 }
 </style>

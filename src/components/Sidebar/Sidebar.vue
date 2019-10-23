@@ -27,25 +27,25 @@
       />-->
       <NavLink
         :activeItem="activeItem"
-        header="TMS"
-        link="/app/tms"
-        iconName="vue"
-        index="tms"
+        header="NotificationMessages"
+        link="/app/notificationMessages"
+        iconName="fa fa-cog"
+        index="notificationMessages"
         isHeader
       />
       <NavLink
         :activeItem="activeItem"
-        header="HR"
-        link="/app/hr"
-        iconName="react"
-        index="hr"
+        header="MailTemplate"
+        link="/app/mailTemplate"
+        iconName="fa fa-cog"
+        index="mailTemplate"
         isHeader
       />
       <NavLink
         :activeItem="activeItem"
         header="Recruit"
         link="/app/recruit"
-        iconName="angular"
+        iconName="fa fa-cog"
         index="recruit"
         isHeader
       />

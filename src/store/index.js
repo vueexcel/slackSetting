@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import login from "./modules/login";
-import tmsSetting from "./modules/tmsSetting";
+import notificationMessage from "./modules/notificationMessage";
 
 import layout from "./layout";
 
@@ -11,6 +11,6 @@ export default new Vuex.Store({
   modules: {
     layout,
     login,
-    tmsSetting
+    notificationMessage
   }
 });

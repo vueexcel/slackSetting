@@ -24,8 +24,8 @@ import RickshawPage from "@/pages/Charts/Rickshaw/Rickshaw";
 import SparklinePage from "@/pages/Charts/Sparkline/Sparkline";
 import EasyPiePage from "@/pages/Charts/EasyPie/EasyPie";
 import ProfilePage from "@/pages/Profile/Profile";
-import TmsSettingPage from "@/components/TmsSettings/TmsSettings";
-import hrSetting from "@/pages/hrSetting/hrSetting";
+import NotificationMessages from "@/components/NotificationMessages/notificationMessages";
+import MailTemplate from "@/pages/MailTemplate/mailTemplate";
 import RecruitSettingPage from "@/pages/RecruitSettingPage/RecruitSettingPage";
 import Setting from "@/pages/Setting/Setting";
 // Profile
@@ -117,9 +117,9 @@ const router = new Router({
          * tms, hr, recruit pages
          */
         {
-          path: "tms",
-          name: "TmsSettingPage",
-          component: TmsSettingPage,
+          path: "notificationMessages",
+          name: "NotificationMessages",
+          component: NotificationMessages,
           meta: { requiresAuth: true }
         },
         {
@@ -128,9 +128,9 @@ const router = new Router({
           component: Setting
         },
         {
-          path: "hr",
-          name: "hrSetting",
-          component: hrSetting
+          path: "mailTemplate",
+          name: "mailTemplate",
+          component: MailTemplate
         },
         {
           path: "recruit",
@@ -372,19 +372,22 @@ const router = new Router({
 //   }
 // }
 
-// router.beforeEach((to, from, next) => {
-// if (to.matched.some(record => record.meta.requiresAuth)) {
-// this route requires auth, check if logged in
-// if not, redirect to login page.
-// if (!validateJwt()) {
-//   next({
-//     path: '/login',
-//   })
-// } else {
-//   next()
-// }
-// } else {
-// next() // make sure to always call next()!
-// }
-// })
+router.beforeEach((to, from, next) => {
+  console.log(to.path);
+  console.log(from);
+  next();
+  // if (to.matched.some(record => record.meta.requiresAuth)) {
+  // this route requires auth, check if logged in
+  // if not, redirect to login page.
+  // if (!validateJwt()) {
+  //   next({
+  //     path: '/login',
+  //   })
+  // } else {
+  //   next()z
+  // }
+  // } else {
+  // next() // make sure to always call next()!
+  // }
+});
 export default router;

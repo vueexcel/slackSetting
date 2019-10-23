@@ -1,0 +1,194 @@
+[
+    {
+        "id": "31",
+        "name": "#employee_name",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "32",
+        "name": "#date",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "33",
+        "name": "#joining_date",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "34",
+        "name": "#employee_title",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "39",
+        "name": "#logo",
+        "value": "<img src=\"Excelogo-black.jpg\" style=\"max-height:30px\">",
+        "variable_type": "system"
+    },
+    {
+        "id": "45",
+        "name": "#salary",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "55",
+        "name": "#page_header",
+        "value": "<div id=\"header\">\\n   <table>\\n      <tr>\\n         <td>\\n            <p class=\"title\">Excellence Technologies<\/p>\\n     \\n         <\/td>\\n         <td style=\"text-align: right;\"><img src=\"Excelogo-black.jpg\" width=\"200px\"\/><\/td>\\n      <\/tr>\\n   <\/table>\\n<\/div>",
+        "variable_type": "user"
+    },
+    {
+        "id": "56",
+        "name": "#page_footer",
+        "value": "<div id=\"footer\">\\n   <table class = \"tab3\" style=\"border-top:3px solid; margin-bottom:8px;\">\\n      <tbody>\\n         <tr>\\n            <td colspan=\"2\">\\n               <div  style=\"background-color: #622423;height:5px;\"><\/div>\\n               <div  style=\"background-color: #622423;height:1px;margin-top:2px;\"><\/div>\\n            <\/td>\\n         <\/tr>\\n         <tr>\\n            <td>                            <b>Excellence Technosoft Pvt Ltd<\/b>                        <\/td>\\n            <td style=\"text-align: right\">                            <a href=\"http:\/\/www.excellencetechnologies.in\">http:\/\/www.excellencetechnologies.in<\/a>                         <\/td>\\n         <\/tr>\\n         <tr>\\n            <td>                            <b>Corp Office:<\/b>C84-A, Sector 8,Noida, U.P. - 201301                        <\/td>\\n            <td style=\"text-align: right\">                            <b>CIN:<\/b> U72200DL2010PTC205087                        <\/td>\\n         <\/tr>\\n         <tr>\\n            <td colspan=\"2\">                            <b>Regd Office:<\/b> 328 GAGAN VIHAR IST MEZZAZINE,NEW DELHI-110051                        <\/td>\\n         <\/tr>\\n      <\/tbody>\\n   <\/table>\\n<\/div>",
+        "variable_type": "user"
+    },
+    {
+        "id": "58",
+        "name": "#office_address",
+        "value": "C84A Second Floor Sector 8, Noida - 201301",
+        "variable_type": "user"
+    },
+    {
+        "id": "59",
+        "name": "#map_location",
+        "value": "https:\/\/www.google.co.in\/maps\/place\/Excellence+Technologies\/@28.5959817,77.3260043,17z\/data=!3m1!4b1!4m5!3m4!1s0x390ce4fc8c75d9e5:0x4ea29a8e67042fb9!8m2!3d28.595977!4d77.328193?hl=en",
+        "variable_type": "user"
+    },
+    {
+        "id": "63",
+        "name": "#employee_user_id",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "64",
+        "name": "#employee_email_id",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "65",
+        "name": "#employee_number",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "67",
+        "name": "#page_break",
+        "value": "<div style='page-break-after:always;'><\/div><br><br><br><br><br><br><br>",
+        "variable_type": "system"
+    },
+    {
+        "id": "105",
+        "name": "#employee_user_name",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "106",
+        "name": "#employee_user_name",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "107",
+        "name": "#employee_user_name",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "108",
+        "name": "#employee_user_name",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "109",
+        "name": "#employee_user_name",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "110",
+        "name": "#employee_user_name",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "111",
+        "name": "#training_completion_date",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "112",
+        "name": "#termination_date",
+        "value": "",
+        "variable_type": "system"
+    },
+    {
+        "id": "114",
+        "name": "#designation",
+        "value": "<p>Web Developer<\/p>",
+        "variable_type": "user"
+    },
+    {
+        "id": "117",
+        "name": "#ref_hr",
+        "value": "<p><br><\/p>",
+        "variable_type": "user"
+    },
+    {
+        "id": "118",
+        "name": "#testbyarun",
+        "value": "<p>testbyarin<\/p>",
+        "variable_type": "user"
+    },
+    {
+        "id": "124",
+        "name": "#director_signature",
+        "value": "<p><strong>Excellence Technologies,<\/strong><\/p>\\n<p><strong>Manish Prakash<\/strong><\/p>\\n<p><strong>(Director)<\/strong><\/p>",
+        "variable_type": "user"
+    },
+    {
+        "id": "134",
+        "name": "#testcodevariable",
+        "value": "<p>&nbsp;<\/p>",
+        "variable_type": "user"
+    },
+    {
+        "id": "164",
+        "name": "#testing-delete",
+        "value": "<p>&nbsp;<\/p>",
+        "variable_type": "user"
+    },
+    {
+        "id": "166",
+        "name": "#new password",
+        "value": "<p><br><\/p>",
+        "variable_type": "user"
+    },
+    {
+        "id": "167",
+        "name": "#data var",
+        "value": "<p><br><\/p>",
+        "variable_type": "user"
+    },
+    {
+        "id": "168",
+        "name": "#123",
+        "value": "321",
+        "variable_type": "user"
+    },
+    {
+        "id": "169",
+        "name": "#ytytt",
+        "value": "<p><em><strong>tdrd<\/strong><\/em><\/p>",
+        "variable_type": "user"
+    }
+]

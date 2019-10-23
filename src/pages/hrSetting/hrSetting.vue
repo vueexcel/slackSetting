@@ -1,13 +1,10 @@
 <template>
   <div>
     <h1>HR Setting</h1>
-    <b-dropdown text="Select Template" variant="outline-success" class="m-2">
-      <b-dropdown-item
-        v-for="( mail, index ) in emailArray"
-        :key="index"
-        @click="selectTemplate(mail,index)"
-      >{{mail.name}}</b-dropdown-item>
-    </b-dropdown>
+    <b-list-group horizontal="md">
+    <b-list-group-item class="border cursor" :class="{active : mail == selected}" v-for="( mail, index ) in emailArray"
+        :key="index" @click="selectTemplate(mail,index)">{{mail.name}}</b-list-group-item>
+  </b-list-group>
     <EmailComp :mail="selected" :variables="variables"></EmailComp>
   </div>
 </template>
@@ -38,5 +35,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style src="./hrSetting.scss" lang="scss" scoped/>
