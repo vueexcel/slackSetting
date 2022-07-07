@@ -35,7 +35,7 @@
     "mavon-editor": "^2.6.15",
     "messenger": "git+https://github.com/HubSpot/messenger.git#v1.4.2",
     "metrojs": "^0.9.77",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "napa": "^3.0.0",
     "node-sass": "^4.9.0",
     "nvd3": "1.8.6",
